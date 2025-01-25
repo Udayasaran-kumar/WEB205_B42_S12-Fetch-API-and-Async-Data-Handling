@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Filter Products with Fetch</title>
+    <style>
+        #products{
+            display: grid;
+            gap:20px;
+            grid-template-columns: repeat(100px,3fr);
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <input type="text" id="search" placeholder="Search by title">
+        <select id="category">
+          <option value="all">All Categories</option>
+        </select>
+        <select id="sort">
+          <option value="none">Sort by Price</option>
+          <option value="asc">Low to High</option>
+          <option value="desc">High to Low</option>
+        </select>
+    </div>
+    <div id="productssection"></div>
+</body>
+</html>
+<script>
+  async function getter()  {productssection
+        let display=document.getElementById('productssection');
+        try{
+        let result=await fetch("https://fakestoreapi.com/products");
+        let product=await result.json();
+        console.log(product);
+        product.forEach((element) => {
+            let post=document.createElement('div');
+            post.classList.add('new');
+            post.innerHTML=`
+            <img src="${element.image}" alt="${element.title}">
+            <h2>${element.title}</h2>
+            <p>${element.price}</p>
+            <button>view details</button>
+            `;
+            display.appendChild(post);
+        });
+        }
+        catch(err){alert("Kindly check the URL")};
+      
+    }
+    getter();
+</script>
