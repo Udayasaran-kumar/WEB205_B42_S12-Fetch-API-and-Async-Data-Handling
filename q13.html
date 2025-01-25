@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Display Products with Error Handling</title>
+    <style>
+        #display{
+            display: grid;
+            grid-template-columns: repeat(1fr);
+            gap: 15px;
+            border: 1px solid black;
+            height: fit-content;
+            
+        }
+        .new{
+            background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      height: 100px;
+      width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="display" ></div>
+    
+</body>
+</html>
+<script>
+    async function getter()  {
+        let display=document.getElementById('display');
+        try{
+        let result=await fetch("https://fakestoreapi.com/products");
+        let product= result.json();
+        console.log(product);
+        product.forEach((element) => {
+            let post=document.createElement('div');
+            post.classList.add('new');
+            post.innerHTML=`
+            <img src="${element.image}" alt="${element.title}">
+            <h2>${element.title}</h2>
+            <p>${element.price}</p>
+            <button>view details</button>
+            `;
+            display.appendChild(post);
+        });
+        }
+        catch(err){alert("Kindly check the URL")};
+      
+    }
+    getter();
+
+
+</script>
