@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<form action="submit" id="weatherForm">
+  <label for="city">Enter City:</label>
+  <input type="text" name="city" id="city">
+  <button>submit</button>
+  </form>
+  <h2 id="weather"></h2> 
+  <!-- added above attributes with same id -->
+</body>
+</html>
+<script>
+const weatherForm = document.getElementById('weatherForm');
+const cityInput = document.getElementById('city');
+const weatherDisplay = document.getElementById('weather');
+
+weatherForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const city = cityInput.value.trim();
+  if(!city){
+    alert('Enter a valid city');//to check whether a city name is entered or not
+  }
+  fetchWeather(city);
+});
+
+async function fetchWeather(city) {
+  try{
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`;
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+  weatherDisplay.textContent = `Temperature in ${city}: ${data.main.temp}°C`;
+}
+catch(err){
+  alert("Invalid URL");//to alert with error messagge
+}
+}
+
+</script>
