@@ -35,7 +35,7 @@
         let display=document.getElementById('display');
         try{
         let result=await fetch("https://fakestoreapi.com/products");
-        let product= result.json();
+        let product=await result.json();
         console.log(product);
         product.forEach((element) => {
             let post=document.createElement('div');
