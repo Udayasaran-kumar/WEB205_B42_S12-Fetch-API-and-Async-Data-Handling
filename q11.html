@@ -6,27 +6,27 @@
     <title>Fetch and Display Users</title>
 </head>
 <body>
-  <ul id="table"></ul>
+  <ul id="table"></ul>//an unordered list is created with id table
 </body>
 </html>
 <script>
-    let res=fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res)=>res.json())
-    .then((response)=>displayPosts(response))
+    let res=fetch("https://jsonplaceholder.typicode.com/users")//this is to fetch the data in url 
+    .then((res)=>res.json())//then the data is converted to readable format using json method
+    .then((response)=>displayPosts(response))//then with the data a function named display posts is invoked
     
     .catch((err)=>console.error(err));
     
 function displayPosts(arr){
-    console.log(arr);
+    console.log(arr);//to check if the data is at the right format to work i consoled it here
     arr.forEach(element => {
-        let list=document.getElementById('table');
-         data=element.name;
-        let findata=document.createElement("li");
-        findata.textContent=data;  
+        let list=document.getElementById('table');//ul list is selected and stored in variable for operations
+         data=element.name;//the name in data is stored in a variable
+        let findata=document.createElement("li");//li for ul is created and stored under findata
+        findata.textContent=data;//text content of li tag to be set as name in data 
         findata.addEventListener('click',()=>{
             alert(`Email:${element.email}`);
-        });
-        list.appendChild(findata);
+        });//li is added with event listener to monitor and if clicked the email of corresponding name in data is showed as an alert
+        list.appendChild(findata);//finally the li is appended to ul
     });
 }
 </script>
